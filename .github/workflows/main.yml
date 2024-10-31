@@ -17,11 +17,11 @@ jobs:
             ISSUE_BODY: ${{ github.event.issue.body }}
             ISSUE_ASSIGNEES:  ${{ join(github.event.issue.assignees.*.login, ', ') }}
             ISSUE_LABELS: ${{ join(github.event.issue.labels.*.name, ', ') }}
-            ISSUE_RESPONSE: $(curl -s https://api.github.com/repos/${{ github.repository }}/issues/$ISSUE_NUMBER)
           run: |
             echo "Issue Number: ${ISSUE_NUMBER}"
             echo "Issue Title: ${ISSUE_TITLE}"
             echo "Issue Body: ${ISSUE_BODY}"
             echo "Issue Assignees: ${ISSUE_ASSIGNEES}"
             echo "Issue Labels: ${ISSUE_LABELS}"
+            ISSUE_RESPONSE=$(curl -s https://api.github.com/repos/${{ github.repository }}/issues/${ISSUE_NUMBER})
             echo "Issue Response: ${ISSUE_RESPONSE}"
