@@ -1,6 +1,6 @@
 name: Auto coder
 on:
-  issue:
+  issues:
     types: [created, reopened]
 
 jobs:
