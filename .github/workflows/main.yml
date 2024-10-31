@@ -1,7 +1,7 @@
 name: Auto coder
 on:
   issues:
-    types: [created, reopened]
+    types: [opened, reopened]
 
 jobs:
   access_issue_info:
