@@ -22,8 +22,8 @@ jobs:
             echo ${{ secrets.GITHUB_TOKEN }}
             echo ${{ github.repository }}
             echo ${{ github.event.issue.number }}
-            echo ${{ env.CHAT_GPT_API_KEY }}
-            ./scripts/script.sh ${{ secrets.GITHUB_TOKEN }} ${{ github.repository }} ${{ github.event.issue.number }} ${{ env.CHAT_GPT_API_KEY }}
+            echo ${{ CHAT_GPT_API_KEY }}
+            ./scripts/script.sh ${{ secrets.GITHUB_TOKEN }} ${{ github.repository }} ${{ github.event.issue.number }} ${{ CHAT_GPT_API_KEY }}
 
         - name: Upload Artifact
           uses: actions/upload-artifact@v4
