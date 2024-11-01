@@ -35,4 +35,4 @@ jobs:
             path: ./autocoder-artifact
 
         - name: Display files in artifact
-          run: ls -l ./autocoder-artifact
+          run: ls -Rl ./autocoder-artifact
