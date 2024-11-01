@@ -4,6 +4,7 @@ on:
     types: [opened, reopened, labeled]
 
 jobs:
+  environment: Auto Coder
   generate_code:
     if: contains(github.event.issue.labels.*.name, 'autocoder-bot')
     runs-on: ubuntu-latest
