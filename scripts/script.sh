@@ -17,10 +17,10 @@ fetch_issue_details() {
 
 # Function to send prompt to the ChatGPT model (OpenAI API)
 send_prompt_to_chatgpt() {
-curl -s -X POST "https://api.openai.com/v1/chat/completions" \
-    -H "Authorization: Bearer $OPENAI_API_KEY" \
-    -H "Content-Type: application/json" \
-    -d "{\"model\": \"gpt-3.5-turbo\", \"messages\": $MESSAGES_JSON, \"max_tokens\": 500}"
+    curl -s -X POST "https://api.openai.com/v1/chat/completions" \
+        -H "Authorization: Bearer $OPENAI_API_KEY" \
+        -H "Content-Type: application/json" \
+        -d "{\"model\": \"gpt-3.5-turbo\", \"messages\": $MESSAGES_JSON, \"max_tokens\": 500}"
 }
 
 
@@ -37,6 +37,9 @@ save_to_file() {
 
 # Fetch and process issue details
 RESPONSE=$(fetch_issue_details)
+
+echo "$RESPONSE"
+
 ISSUE_BODY=$(echo "$RESPONSE" | jq -r .body)
 
 if [[ -z "$ISSUE_BODY" ]]; then

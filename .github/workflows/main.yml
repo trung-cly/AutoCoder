@@ -13,19 +13,12 @@ jobs:
           uses: actions/checkout@v4
 
         - name: Setup permissions for script
-          run: |
-            ls -Rl .
-            chmod +x ./scripts/script.sh
+          run: chmod +x ./scripts/script.sh
 
         - name: Run Script
           env:
             CHAT_GPT_API_KEY: ${{ secrets.CHAT_GPT_API_KEY }}
-          run: |
-            echo ${{ secrets.GITHUB_TOKEN }}
-            echo ${{ github.repository }}
-            echo ${{ github.event.issue.number }}
-            echo ${{ env.CHAT_GPT_API_KEY }}
-            ./scripts/script.sh ${{ secrets.GITHUB_TOKEN }} ${{ github.repository }} ${{ github.event.issue.number }} ${{ env.CHAT_GPT_API_KEY }}
+          run: ./scripts/script.sh ${{ secrets.GITHUB_TOKEN }} ${{ github.repository }} ${{ github.event.issue.number }} ${{ env.CHAT_GPT_API_KEY }}
 
         - name: Upload Artifact
           uses: actions/upload-artifact@v4
