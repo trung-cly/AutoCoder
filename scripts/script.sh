@@ -37,9 +37,6 @@ save_to_file() {
 
 # Fetch and process issue details
 RESPONSE=$(fetch_issue_details)
-
-echo "$RESPONSE"
-
 ISSUE_BODY=$(echo "$RESPONSE" | jq -r .body)
 
 if [[ -z "$ISSUE_BODY" ]]; then
@@ -56,8 +53,12 @@ FULL_PROMPT="$INSTRUCTIONS\n\n$ISSUE_BODY"
 # Prepare the messages array for the ChatGPT API, including the instructions
 MESSAGES_JSON=$(jq -n --arg body "$FULL_PROMPT" '[{"role": "user", "content": $body}]')
 
+echo "$MESSAGES_JSON"
+
 # Send the prompt to the ChatGPT model
 RESPONSE=$(send_prompt_to_chatgpt)
+
+echo "$RESPONSE"
 
 if [[ -z "$RESPONSE" ]]; then
     echo "No response received from the OpenAI API."
