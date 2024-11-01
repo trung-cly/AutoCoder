@@ -1,7 +1,7 @@
 name: Auto coder
 on:
   issues:
-    types: [opened, reopened]
+    types: [opened, reopened, labeled]
 
 jobs:
   generate_code:
