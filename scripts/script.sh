@@ -53,8 +53,6 @@ FULL_PROMPT="$INSTRUCTIONS\n\n$ISSUE_BODY"
 # Prepare the messages array for the ChatGPT API, including the instructions
 MESSAGES_JSON=$(jq -n --arg body "$FULL_PROMPT" '[{"role": "user", "content": $body}]')
 
-echo "$MESSAGES_JSON"
-
 # Send the prompt to the ChatGPT model
 RESPONSE=$(send_prompt_to_chatgpt)
 

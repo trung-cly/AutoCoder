@@ -2,6 +2,8 @@ name: Auto coder
 on:
   issues:
     types: [opened, reopened, labeled]
+permissions:
+  pull-requests: write
 
 jobs:
   generate_code:
@@ -20,21 +22,17 @@ jobs:
             CHAT_GPT_API_KEY: ${{ secrets.CHAT_GPT_API_KEY }}
           run: ./scripts/script.sh ${{ secrets.GITHUB_TOKEN }} ${{ github.repository }} ${{ github.event.issue.number }} ${{ env.CHAT_GPT_API_KEY }}
 
-        - name: Upload Artifact
-          uses: actions/upload-artifact@v4
-          with:
-            name: autocoder-artifact
-            path: |
-              ./* 
-              !./.github/**
-              !./.git/** 
-              !./*.yml
+        - name: Commit and push changes
+          run: |
+            git config --global user.name 'autocoder-bot'
+            git config --global user.email 'actions@github.com'
+            git add .
+            git commit -m "Auto coder changes"
+            git push
 
-        - name: Download Artifact
-          uses: actions/download-artifact@v4
+        - name: Create a Pull Request
+          uses: peter-evans/create-pull-request@v7
           with:
-            name: autocoder-artifact
-            path: ./autocoder-artifact
-
-        - name: Display files in artifact
-          run: ls -Rl ./autocoder-artifact
+            branch: 'autocoder-branch-${{ github.event.issue.number }}'
+            base: 'main'
+            labels: 'autocoder-bot'
