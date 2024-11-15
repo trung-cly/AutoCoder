@@ -20,7 +20,7 @@ jobs:
 
         - name: Create and switch to branch
           run: |
-            git checkout -b AUTO_CODER_BRANCH
+            git checkout -b $AUTO_CODER_BRANCH
 
         - name: Setup permissions for script
           run: chmod +x ./scripts/script.sh
