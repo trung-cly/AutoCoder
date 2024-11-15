@@ -3,6 +3,7 @@ on:
   issues:
     types: [opened, reopened, labeled]
 permissions:
+  issues: write
   contents: write
   pull-requests: write
 
@@ -11,6 +12,8 @@ jobs:
     if: contains(github.event.issue.labels.*.name, 'autocoder-bot')
     runs-on: ubuntu-latest
     environment: Auto Coder
+    env:
+      AUTO_CODER_BRANCH: autocoder-branch-${{ github.event.issue.number }}
     steps:
         - name: Checkout Code
           uses: actions/checkout@v4
@@ -23,16 +26,21 @@ jobs:
             CHAT_GPT_API_KEY: ${{ secrets.CHAT_GPT_API_KEY }}
           run: ./scripts/script.sh ${{ secrets.GITHUB_TOKEN }} ${{ github.repository }} ${{ github.event.issue.number }} ${{ env.CHAT_GPT_API_KEY }}
 
-        - name: Commit changes
+        - name: Create and switch to new branch
+          run: |
+            git checkout -b $AUTO_CODER_BRANCH
+
+        - name: Commit and Push changes
           run: |
             git config --global user.name 'autocoder-bot'
             git config --global user.email 'actions@github.com'
             git add .
-            git commit -m "Auto coder changes"
+            git diff-index --quiet HEAD || git commit -m "Auto coder changes"
+            git push origin $AUTO_CODER_BRANCH
 
         - name: Create a Pull Request
           uses: peter-evans/create-pull-request@v7
           with:
-            branch: 'autocoder-branch-${{ github.event.issue.number }}'
+            branch: ${{ env.AUTOCODER_BRANCH }}
             base: 'main'
             labels: 'autocoder-bot'
