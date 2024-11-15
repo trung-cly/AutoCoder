@@ -18,6 +18,10 @@ jobs:
         - name: Checkout Code
           uses: actions/checkout@v4
 
+        - name: Create and switch to branch
+          run: |
+            git checkout -b AUTO_CODER_BRANCH
+
         - name: Setup permissions for script
           run: chmod +x ./scripts/script.sh
 
@@ -25,14 +29,6 @@ jobs:
           env:
             CHAT_GPT_API_KEY: ${{ secrets.CHAT_GPT_API_KEY }}
           run: ./scripts/script.sh ${{ secrets.GITHUB_TOKEN }} ${{ github.repository }} ${{ github.event.issue.number }} ${{ env.CHAT_GPT_API_KEY }}
-
-        - name: Check if branch exists
-          run: |
-            git ls-remote --exit-code --heads origin $AUTO_CODER_BRANCH || git checkout -b $AUTO_CODER_BRANCH
-
-        - name: Pull changes from remote (if exists)
-          run: |
-            git pull origin $AUTO_CODER_BRANCH --rebase || true
 
         - name: Commit changes
           run: |
