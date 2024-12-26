@@ -19,8 +19,16 @@ jobs:
         uses: trung-cly/AutoCoder@v1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          openai_api_key: ${{ secrets.OPENAI_API_KEY }}
-          issue_label: 'autocoder'
+          repository: ${{ github.repository }}
+          issue_number: ${{ github.event.issue.number }}
+          openai_api_key: ${{ secrets.CHAT_GPT_API_KEY }}
+          script_path: './scripts/script.sh'
+          label: 'autocoder'
 ```
 
 This configuration will invoke the AutoCoder action when an issue is labeled with the specified label.
+Then, follow these steps:
+
+1. Create a new issue in your repository and add the label specified in the workflow file (e.g., `autocoder`).
+2. The AutoCoder action will be triggered automatically, fetching the issue details and generating code based on the issue description.
+3. The generated code will be committed to a new branch and a pull request will be created for review.
