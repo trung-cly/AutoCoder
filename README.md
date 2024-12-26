@@ -11,10 +11,7 @@ on:
 jobs:
   generate_code:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        
+    steps:        
       - name: AutoCoder Composite Action
         uses: trung-cly/AutoCoder@v1
         with:
