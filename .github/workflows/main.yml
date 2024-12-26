@@ -15,8 +15,11 @@ jobs:
     env:
       AUTO_CODER_BRANCH: autocoder-branch-${{ github.event.issue.number }}
     steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
       - name: AutoCoder Composite Action
-        uses: ./ # Uses an action in the root directory
+        uses: trung-cly/AutoCoder@v1
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPOSITORY: ${{ github.repository }}
