@@ -18,12 +18,12 @@ jobs:
       - name: AutoCoder Composite Action
         uses: trung-cly/AutoCoder@v1
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          repository: ${{ github.repository }}
-          issue_number: ${{ github.event.issue.number }}
-          openai_api_key: ${{ secrets.CHAT_GPT_API_KEY }}
-          script_path: './scripts/script.sh'
-          label: 'autocoder'
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPOSITORY: ${{ github.repository }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          OPENAI_API_KEY: ${{ secrets.CHAT_GPT_API_KEY }}
+          SCRIPT_PATH: './scripts/script.sh'
+          LABEL: 'autocoder'
 ```
 
 This configuration will invoke the AutoCoder action when an issue is labeled with the specified label.
@@ -37,12 +37,12 @@ Then, follow these steps:
 
 The action requires the following inputs:
 
-- `github_token` - The GitHub token to authenticate with the GitHub API.
-- `repository` - The repository name.
-- `issue_number` - The issue number to be processed.
-- `openai_api_key` - The OpenAI API key for the GPT-3.5 model.
-- `script_path` - The path to the script file used for code generation.
-- `label` - The label that triggers the action.
+- `GITHUB_TOKEN` - The GitHub token to authenticate with the GitHub API.
+- `REPOSITORY` - The repository name.
+- `ISSUE_NUMBER` - The issue number to be processed.
+- `OPENAI_API_KEY` - The OpenAI API key for the GPT-3.5 model.
+- `SCRIPT_PATH` - The path to the script file used for code generation.
+- `LABEL` - The label that triggers the action.
 
 ### Outputs
 

@@ -21,9 +21,9 @@ jobs:
       - name: AutoCoder Composite Action
         uses: ./ # Uses an action in the root directory
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          repository: ${{ github.repository }}
-          issue_number: ${{ github.event.issue.number }}
-          openai_api_key: ${{ secrets.CHAT_GPT_API_KEY }}
-          script_path: './scripts/script.sh'
-          label: 'autocoder-bot'
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPOSITORY: ${{ github.repository }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          OPENAI_API_KEY: ${{ secrets.CHAT_GPT_API_KEY }}
+          SCRIPT_PATH: './scripts/script.sh'
+          LABEL: 'autocoder-bot'
