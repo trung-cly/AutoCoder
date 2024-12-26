@@ -32,3 +32,18 @@ Then, follow these steps:
 1. Create a new issue in your repository and add the label specified in the workflow file (e.g., `autocoder`).
 2. The AutoCoder action will be triggered automatically, fetching the issue details and generating code based on the issue description.
 3. The generated code will be committed to a new branch and a pull request will be created for review.
+
+### Inputs
+
+The action requires the following inputs:
+
+- `github_token` - The GitHub token to authenticate with the GitHub API.
+- `repository` - The repository name.
+- `issue_number` - The issue number to be processed.
+- `openai_api_key` - The OpenAI API key for the GPT-3.5 model.
+- `script_path` - The path to the script file used for code generation.
+- `label` - The label that triggers the action.
+
+### Outputs
+
+The action does not provide any outputs.
