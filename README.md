@@ -1,4 +1,26 @@
-# AutoCoder
-This project will help you gain hands-on experience with GitHub Actions, the GitHub API, Bash scripting, and integrating third-party services like OpenAI's ChatGPT. You will also learn about workflow automation, security considerations, and the power of integrating AI in DevOps practices.
+## Using the AutoCoder Composite Action
 
-Dive into the cutting-edge intersection of DevOps and AI with AutoCoder. This project guides you to build a reusable GitHub Action that leverages Generative AI to auto-generate code. You will create workflows, interact with OpenAI using scripts, enforce security standards, and eventually convert your project to a reusable GitHub Action to share with others or show off in your portfolio.
+To use this action, set up a `.github/workflows/main.yml` file in your repository like that below
+
+```yaml
+name: AutoCodeGen
+on:
+  issues:
+    types: [labeled]
+
+jobs:
+  generate_code:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        
+      - name: AutoCoder Composite Action
+        uses: trung-cly/AutoCoder@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          openai_api_key: ${{ secrets.OPENAI_API_KEY }}
+          issue_label: 'autocoder'
+```
+
+This configuration will invoke the AutoCoder action when an issue is labeled with the specified label.
